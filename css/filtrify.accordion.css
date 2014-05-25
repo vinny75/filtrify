@@ -27,6 +27,9 @@ div.ft-menu * {
 div.ft-menu { 
 	list-style: none;
 }
+div.ft-menu > h3 > span.ft-reset { 
+	float: right;
+}
 
 /*div.ft-menu > div.ft-field { 
 	display: inline-block; 

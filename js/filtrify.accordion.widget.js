@@ -16,7 +16,7 @@
 			noresults : "No results match",
 			hide      : true,
 			block     : [],
-			close     : false,
+			/*close     : false,*/
 			query     : undefined, // { category : [tags] } }
 			callback  : undefined, // function ( query, match, mismatch ) {}
 			container : '#container'
@@ -111,7 +111,8 @@
 		_build: function ( f ) {
 			var html, t, tag, tags = [];
 				
-			html = "<h3><span class='ft-label'>" + f + "</span></h3>" + 
+			html = "<h3><span class='ft-label'>" + f + "</span>" +
+			"<span title='Clear filters' class='ft-reset ui-icon ui-icon-circle-close'></span></h3>" + 
 			"<div class='ft-field'>" +
 			"<div class='ft-panel'>" +
 			"<ul class='ft-selected' style='display:none;'></ul>" +
@@ -141,6 +142,7 @@
 			this._menu[f].search = this._menu[f].item.find("fieldset.ft-search");
 			this._menu[f].tags = this._menu[f].item.find("ul.ft-tags");
 			this._menu[f].mismatch = this._menu[f].item.find("div.ft-mismatch");
+			this._menu[f].reset = this._menu[f].item.find("span.ft-reset");
 
 			this._menu[f].highlight = $([]);
 			this._menu[f].active = $([]);
@@ -199,16 +201,22 @@
 				this._unselect( f, $( event.target ).text() );
 				this._filter();
 			}, this) );
+			
+			this._menu[f].reset.on( "click", this._bind(function(event){
+				this._clearSelected( f );
+				this._updateQueryField( f, {} );
+				this._filter();
+			}, this) );			
 
 		},
 		
-		_openPanel: function ( f ) {
+		/*_openPanel: function ( f ) {
 			this._menu[f].search.find("input").focus();
 		},
 		
 		_closePanel: function ( f ) {
 			this._resetSearch( f );
-		},
+		},*/
 
 		_preventOverflow: function ( f ) {
 			var high_bottom, high_top, maxHeight, visible_bottom, visible_top;
@@ -318,10 +326,6 @@
 			this._hideHighlight( f );
 			this._resetHighlight( f );
 			this._resetSearch( f );
-
-			if ( this.options.close ) {
-				this._closePanel( f );
-			};
 		},
 
 		_updateQueryTags: function ( f, tag ) {
