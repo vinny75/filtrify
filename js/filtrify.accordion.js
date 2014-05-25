@@ -489,9 +489,9 @@
 					element.setAttribute("data-count", count );
 						
 					if ( count === 0 ) {
-						$(element).addClass("ft-hidden");
+						$(element).addClass("ft-no-items-hidden");
 					} else {
-						$(element).removeClass("ft-hidden");
+						$(element).removeClass("ft-no-items-hidden");
 					};							
 					
 				}, this ) );

@@ -263,7 +263,7 @@ div.ft-menu > div.ft-field > div.ft-panel > div.ft-mismatch {
 }
 
 /* REQUIRED! */
-.ft-hidden { display: none !important; }
+.ft-hidden, .ft-no-items-hidden { display: none !important; }
 
 
 /* Custom webkit scrollbars */
