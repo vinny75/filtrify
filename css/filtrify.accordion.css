@@ -111,7 +111,8 @@ div.ft-menu > div.ft-field > div.ft-panel:after {
 	padding: 10px 10px 0 10px;
 	background: #F5F3EE;
 }*/
-div.ft-menu > div.ft-field > div.ft-panel > ul.ft-selected > li {
+div.ft-menu > div.ft-field > div.ft-panel > ul.ft-selected > li, 
+ul.ft-legend > li > ul.ft-selected > li{
 	font-size: 10px;
 	display: inline-block;
 	*display: inline; 
@@ -136,11 +137,13 @@ div.ft-menu > div.ft-field > div.ft-panel > ul.ft-selected > li {
 	background: -ms-linear-gradient(#33BCEF, #019AD2);
 	background: linear-gradient(#33BCEF, #019AD2);
 }
-div.ft-menu > div.ft-field > div.ft-panel > ul.ft-selected > li:after {
+div.ft-menu > div.ft-field > div.ft-panel > ul.ft-selected > li:after, 
+ul.ft-legend > li > ul.ft-selected > li:after {
 	content: " \00D7";
 	color: white;
 }
-div.ft-menu > div.ft-field > div.ft-panel > ul.ft-selected > li:active {
+div.ft-menu > div.ft-field > div.ft-panel > ul.ft-selected > li:active,
+ul.ft-legend > li > ul.ft-selected > li:active {
 	background: #33BCEF;
 	background: -webkit-linear-gradient(#019AD2, #33BCEF);
 	background: -moz-linear-gradient(#019AD2, #33BCEF);

@@ -19,7 +19,8 @@
 			/*close     : false,*/
 			query     : undefined, // { category : [tags] } }
 			callback  : undefined, // function ( query, match, mismatch ) {}
-			container : '#container'
+			container : '#container',
+			legend    : '#legend'
 		},	
 		
 		_create: function() {
@@ -38,6 +39,18 @@
 			this._z = 9999;
 			
 			this._load();
+			
+			if ( this.options.legend !== undefined) {
+				var l = $(this.options.legend).append("<ul class='ft-legend'></ul>");
+				this._legend = l.find('.ft-legend');
+				/*
+				this._legend.selected.on( "click", "li", this._bind(function(event){
+					var f = event.target.getAttribute("data-field");
+					this._unselect( f, $( event.target ).text() );
+					this._filter();
+				}, this) );	*/					
+			}			
+			
 			this._set();
 
 			if ( this.options.query !== undefined ) { 
@@ -133,6 +146,10 @@
 			html += "</ul><div class='ft-mismatch ft-hidden'></div></div></div>";
 
 			this._menu[f].item = $(html);
+			if (this._legend) {
+				var l = $("<li>"+f+":<ul class='ft-selected'></ul></li>").appendTo(this._legend);
+				this._menu[f].breadcrumb = l.find('.ft-selected');
+			}
 		},
 		
 		_cache: function ( f ) {
@@ -201,6 +218,13 @@
 				this._unselect( f, $( event.target ).text() );
 				this._filter();
 			}, this) );
+			
+			if (this._menu[f].breadcrumb) {
+				this._menu[f].breadcrumb.on( "click", "li", this._bind(function(event){
+					this._unselect( f, $( event.target ).text() );
+					this._filter();
+				}, this) );	
+			}
 			
 			this._menu[f].reset.on( "click", this._bind(function(event){
 				this._clearSelected( f );
@@ -348,6 +372,7 @@
 
 		_appendToSelected: function ( f ) {
 			this._menu[f].selected.append( this._menu[f].highlight.clone() );
+			if (this._menu[f].breadcrumb) this._menu[f].breadcrumb.append( this._menu[f].highlight.clone() );
 			this._slideSelected( f );
 		},
 
@@ -370,7 +395,16 @@
 					return ( this.textContent || this.innerText ) === tag; 
 				})
 				.remove();
-
+				
+			if (this._menu[f].breadcrumb) {	
+				this._menu[f].breadcrumb
+					.children()
+					.filter(function() { 
+						return ( this.textContent || this.innerText ) === tag; 
+					})
+					.remove();				
+			}
+			
 			this._slideSelected( f );
 		},
 
@@ -527,6 +561,7 @@
 
 		_clearSelected: function ( f ) {
 			this._menu[f].selected.empty();
+			if (this._menu[f].breadcrumb) this._menu[f].breadcrumb.empty();
 			this._menu[f].active = $([]);
 		},
 
