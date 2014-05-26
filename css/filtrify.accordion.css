@@ -111,6 +111,18 @@ div.ft-menu > div.ft-field > div.ft-panel:after {
 	padding: 10px 10px 0 10px;
 	background: #F5F3EE;
 }*/
+ul.ft-legend,
+ul.ft-legend > li > ul.ft-selected  {
+	padding: 0px;
+	margin: 0px;
+}
+ul.ft-legend > li {
+	display: inline-block;
+	*display: inline; 
+	*zoom: 1;
+	margin: 1px;
+	padding: 0px 5px 1px 5px;
+}
 div.ft-menu > div.ft-field > div.ft-panel > ul.ft-selected > li, 
 ul.ft-legend > li > ul.ft-selected > li{
 	font-size: 10px;

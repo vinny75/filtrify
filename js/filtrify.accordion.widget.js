@@ -148,7 +148,7 @@
 
 			this._menu[f].item = $(html);
 			if (this._legend) {
-				var l = $("<li>"+f+":<ul class='ft-selected'></ul></li>").appendTo(this._legend);
+				var l = $("<li>"+f+":</li><li><ul class='ft-selected'></ul></li>").appendTo(this._legend);
 				this._menu[f].breadcrumb = l.find('.ft-selected');
 			}
 		},
